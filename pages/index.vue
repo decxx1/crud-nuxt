@@ -153,7 +153,14 @@ export default {
             })
             .catch(error => {
                 console.error(error)
-                self.$toast.add({severity:'error', summary: 'Error!', detail: error.message, life: 4000});
+                if (error.response && error.response.data && error.response.data.message) {
+                    const errorMessage = error.response.data.message;
+                    console.error(errorMessage);
+                    self.$toast.add({ severity: 'error', summary: 'Error!', detail: errorMessage, life: 4000 });
+                } else {
+                    console.error(error);
+                    self.$toast.add({ severity: 'error', summary: 'Error!', detail: 'Error desconocido', life: 4000 });
+                }
             })
         },
         edit() {
@@ -170,7 +177,14 @@ export default {
             })
             .catch(error => {
                 console.error(error);
-                self.$toast.add({severity:'error', summary: 'Error', detail: error.message, life: 4000});
+                if (error.response && error.response.data && error.response.data.message) {
+                    const errorMessage = error.response.data.message;
+                    console.error(errorMessage);
+                    self.$toast.add({ severity: 'error', summary: 'Error!', detail: errorMessage, life: 4000 });
+                } else {
+                    console.error(error);
+                    self.$toast.add({ severity: 'error', summary: 'Error!', detail: 'Error desconocido', life: 4000 });
+                }
             })
         },
         deleteUser() {
@@ -182,7 +196,14 @@ export default {
             })
             .catch(error => {
                 console.log(error);
-                self.$toast.add({severity:'error', summary: 'Error!', detail: error.message, life: 4000});
+                if (error.response && error.response.data && error.response.data.message) {
+                    const errorMessage = error.response.data.message;
+                    console.error(errorMessage);
+                    self.$toast.add({ severity: 'error', summary: 'Error!', detail: errorMessage, life: 4000 });
+                } else {
+                    console.error(error);
+                    self.$toast.add({ severity: 'error', summary: 'Error!', detail: 'Error desconocido', life: 4000 });
+                }
             })
             .finally(() => {
                 self.reloadUsers();
