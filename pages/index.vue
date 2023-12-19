@@ -15,8 +15,9 @@
                 </template>
             </Toolbar>
 
-            <DataTable ref="dt" :value="users" v-model:selection="selectedUsers" dataKey="id" 
+            <DataTable ref="dt" :value="users" v-model:selection="selectedUsers" stripedRows dataKey="id" 
                 :paginator="true" :rows="10" :filters="filters"
+                
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[5,10,25]"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users">
                 <template #header>
@@ -47,6 +48,12 @@
 
         <!-- Crear y editar -->
         <Dialog v-model:visible="userDialog" :style="{width: '450px'}" header="Crear Usuario" :modal="true" class="p-fluid">
+            <div class="field">
+				<label for="roles">Rol</label>
+                <Dropdown id="roles" v-model="user.role" :options="roles" optionLabel="name" optionValue="id" placeholder="Seleccione un Rol" class="w-100" :pt="{
+                    item: { class: 'ps-2' }
+                }"/>
+			</div>
             <div class="field">
                 <label for="name">Nombre</label>
                 <InputText id="name" v-model.trim="user.name" required="true" type="text" autofocus :class="{'p-invalid': submitted && !user.name}" />
@@ -100,6 +107,7 @@ export default {
             submitted: false,
             user:{},
             users: [],
+            roles:[],
             api: '',
         }
     },
@@ -111,6 +119,8 @@ export default {
     async mounted() {
         const response = await fetch(this.api + 'api/user/index');
         this.users = await response.json();
+        const response2 = await fetch(this.api + 'api/roles');
+        this.roles = await response2.json();
     },
     methods: {
         openForm(){
@@ -162,6 +172,9 @@ export default {
                     self.$toast.add({ severity: 'error', summary: 'Error!', detail: 'Error desconocido', life: 4000 });
                 }
             })
+            .finally(() => {
+                
+            });
         },
         edit() {
             this.submitted = true;
@@ -186,6 +199,9 @@ export default {
                     self.$toast.add({ severity: 'error', summary: 'Error!', detail: 'Error desconocido', life: 4000 });
                 }
             })
+            .finally(() => {
+               
+            });
         },
         deleteUser() {
             var self = this;

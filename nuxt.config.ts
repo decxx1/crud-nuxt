@@ -4,17 +4,21 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare-pages',
   },
-  devtools: { 
-    enabled: false,
+  routeRules: {
+    "/": {ssr: false}
   },
-  modules: ['nuxt-primevue' ],
+  devtools: { 
+    enabled: true,
+  },
+  modules: ['nuxt-primevue'],
   primevue: {
     usePrimeVue: true,
     options:{
-      ripple:true
+      ripple:true,
+      unstyled: false,
     },
     components: {
-      include: ['Toolbar','Button','FileUpload','DataTable','InputText','Column','Dialog','Toast'],
+      include: ['Toolbar','Button','FileUpload','DataTable','InputText','Column','Dialog','Toast','Dropdown','Tag'],
     },
   },
   css: [
