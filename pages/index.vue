@@ -67,7 +67,7 @@
             <div class="field">
                 <label for="password_confirmation">Repetir Contraseña</label>
                 <InputText id="password_confirmation" v-model.trim="user.password_confirmation" required="true" type="password" autofocus :class="{'p-invalid': submitted && !user.password_confirmation}" />
-                <small class="p-error" v-if="submitted && !user.password_confirmation">Repita la contraseña.</small>
+                <small class="p-error" v-if="submitted && !user.password_confirmation">Las contraseñas no coinciden.</small>
             </div>
             <div class="field">
 				<label for="roles">Rol</label>
@@ -122,7 +122,7 @@ export default {
         
     },
     async mounted() {
-        const response = await fetch(this.api + 'api/user/index');
+        const response = await fetch(this.api + 'api/users');
         this.users = await response.json();
         const response2 = await fetch(this.api + 'api/roles');
         this.roles = await response2.json();
@@ -147,7 +147,7 @@ export default {
         },
         reloadUsers(){
             var self = this;
-            axios.get(self.api + 'api/user/index')
+            axios.get(self.api + 'api/users')
             .then(response => {
                 self.users = response.data;
             })
@@ -158,7 +158,7 @@ export default {
         create(){
             this.submitted = true;
             var self = this;
-            axios.post(self.api + 'api/user/create', self.user)
+            axios.post(self.api + 'api/users', self.user)
             .then(response => {
                 console.log('usuario creado');
                 self.reloadUsers();
@@ -185,7 +185,7 @@ export default {
         edit() {
             this.submitted = true;
             var self = this;
-            axios.put(self.api + 'api/user/update/'+self.user.id, self.user)
+            axios.put(self.api + 'api/users/'+self.user.id, self.user)
             .then(response => {
                 console.log('Usuario editado');
                 self.reloadUsers()
@@ -211,7 +211,7 @@ export default {
         },
         deleteUser() {
             var self = this;
-            axios.delete(self.api + 'api/user/delete/'+self.user.id)
+            axios.delete(self.api + 'api/users/'+self.user.id)
             .then(response => {
                 console.log('usuario borrado');
                 self.$toast.add({severity:'success', summary: 'Successful', detail: 'Usuario eliminado', life: 3000});
