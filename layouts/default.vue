@@ -1,15 +1,7 @@
-<template>
-  <div class="layout-content">
-    <slot />
-  </div>
-</template>
-
-<script>
-export default {
-
-}
+<script setup>
+import AppLayout from '@/layouts/AppLayout.vue';
 </script>
 
-<style>
-
-</style>
+<template>
+    <app-layout></app-layout>
+</template>

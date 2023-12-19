@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     "/": {ssr: false}
   },
   devtools: { 
-    enabled: true,
+    enabled: false,
   },
   modules: ['nuxt-primevue'],
   primevue: {
@@ -18,7 +18,7 @@ export default defineNuxtConfig({
       unstyled: false,
     },
     components: {
-      include: ['Toolbar','Button','FileUpload','DataTable','InputText','Column','Dialog','Toast','Dropdown','Tag'],
+      exclude: ['Editor']
     },
   },
   css: [
