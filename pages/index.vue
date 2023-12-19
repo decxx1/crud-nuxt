@@ -48,12 +48,7 @@
 
         <!-- Crear y editar -->
         <Dialog v-model:visible="userDialog" :style="{width: '450px'}" header="Crear Usuario" :modal="true" class="p-fluid">
-            <div class="field">
-				<label for="roles">Rol</label>
-                <Dropdown id="roles" v-model="user.role" :options="roles" optionLabel="name" optionValue="id" placeholder="Seleccione un Rol" class="w-100" :pt="{
-                    item: { class: 'ps-2' }
-                }"/>
-			</div>
+            
             <div class="field">
                 <label for="name">Nombre</label>
                 <InputText id="name" v-model.trim="user.name" required="true" type="text" autofocus :class="{'p-invalid': submitted && !user.name}" />
@@ -69,7 +64,17 @@
                 <InputText id="password" v-model.trim="user.password" required="true" type="password" autofocus :class="{'p-invalid': submitted && !user.password}" />
                 <small class="p-error" v-if="submitted && !user.password">Contraseña es Requerida.</small>
             </div>
-
+            <div class="field">
+                <label for="password_confirmation">Repetir Contraseña</label>
+                <InputText id="password_confirmation" v-model.trim="user.password_confirmation" required="true" type="password" autofocus :class="{'p-invalid': submitted && !user.password_confirmation}" />
+                <small class="p-error" v-if="submitted && !user.password_confirmation">Repita la contraseña.</small>
+            </div>
+            <div class="field">
+				<label for="roles">Rol</label>
+                <Dropdown id="roles" v-model="user.role" :options="roles" optionLabel="name" optionValue="id" placeholder="Seleccione un Rol" class="w-100" :pt="{
+                    item: { class: 'ps-2' }
+                }"/>
+			</div>
             <template #footer>
                 <Button label="Cancel" icon="pi pi-times" text @click="hideDialog"/>
                 <Button v-show="!user.id" label="Crear Usuario" icon="pi pi-check" text @click="create()" />
@@ -127,6 +132,7 @@ export default {
             this.resetUser();
             this.submitted = false;
             this.userDialog = true;
+            this.user = {role:8}
         },
         editForm(items) {
             this.user = {...items};
