@@ -98,9 +98,9 @@
 </template>
 
 <script setup>
-    // definePageMeta({
-    //     middleware: ['auth'],
-    // });
+    definePageMeta({
+        middleware: ['auth'],
+    });
 </script>
 
 <script >
@@ -128,7 +128,6 @@ export default {
         this.initFilters();
         this.api = useState('api').value;
         this.jwt = useState('jwt').value;
-        
     },
     async mounted() {
         const response = await fetch(this.api + 'api/users',{
