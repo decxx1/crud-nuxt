@@ -63,7 +63,7 @@ export default {
             axios.post(self.api + 'api/register', self.datos)
             .then(response => {
                 console.log('Usuario registrado');
-                Cookies.set("jwt", response.data.access_token);
+                Cookies.set("jwt", response.data.access_token, {sameSite: 'None', secure: true});
                 navigateTo('/crud');
             })
             .catch(error => {

@@ -66,7 +66,7 @@ export default {
             axios.post(self.api + 'api/login', self.datos)
             .then(response => {
                 console.log('Usuario logeado');
-                Cookies.set("jwt", response.data.token);
+                Cookies.set("jwt", response.data.token, {sameSite: 'None', secure: true});
                 navigateTo('/crud');
             })
             .catch(error => {

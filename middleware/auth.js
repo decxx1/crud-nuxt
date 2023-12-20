@@ -7,6 +7,7 @@ export default defineNuxtRouteMiddleware( async () => {
     if(Cookies.get('jwt')){
         jwt = Cookies.get('jwt');
         const chk_jwt = await fetch(api + "api/verify-token", {
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${jwt}`
             }
