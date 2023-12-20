@@ -98,9 +98,9 @@
 </template>
 
 <script setup>
-    definePageMeta({
-        middleware: ['auth'],
-    });
+    // definePageMeta({
+    //     middleware: ['auth'],
+    // });
 </script>
 
 <script >
@@ -111,6 +111,7 @@ export default {
     data() {
         return {
             userDialog: false,
+            dt:null,
             deleteuserDialog: false,
             deleteUsersDialog: false,
             selectedUsers: null,

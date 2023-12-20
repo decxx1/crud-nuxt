@@ -25,7 +25,8 @@ export default defineNuxtConfig({
     'primevue/resources/themes/lara-light-green/theme.css',
     'primeicons/primeicons.css',
     'bootstrap/dist/css/bootstrap.css',
-    'primeflex/primeflex.css'
+    'primeflex/primeflex.css',
+    '@/assets/styles.scss'
   ],
   runtimeConfig: {
     public: {
