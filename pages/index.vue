@@ -51,8 +51,12 @@ export default {
     data() {
         return {
             datos:{name:'usuario',role:8, email:'',password:'',password_confirmation:'123456'},
-            checked:''
+            checked:'',
+            api:''
         }
+    },
+    created() {
+        this.api = useRuntimeConfig().public.API_PATH;
     },
     methods: {
         login(){
