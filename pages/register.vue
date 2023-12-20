@@ -10,8 +10,8 @@
                     </div>
 
                     <div>
-                        <label for="user1" class="block text-900 text-xl font-medium mb-2">Nombre</label>
-                        <InputText id="user1" v-model="datos.name" type="text" placeholder="Nombre y apellido" class="w-full md:w-30rem mb-5" style="padding: 1rem" />
+                        <label for="user1" class="block text-900 text-xl font-medium mb-2">Usuario</label>
+                        <InputText id="user1" v-model="datos.name" type="text" placeholder="Usuario" class="w-full md:w-30rem mb-5" style="padding: 1rem" />
 
                         <label for="email1" class="block text-900 text-xl font-medium mb-2">E-mail</label>
                         <InputText id="email1" v-model="datos.email" type="email" placeholder="E-mail" class="w-full md:w-30rem mb-3" style="padding: 1rem" />
@@ -49,7 +49,7 @@ const { layoutConfig } = useLayout();
 export default {
     data() {
         return {
-            datos:{name:'',email:'',password:'',password_confirmation:'',role:8},
+            datos:{name:'',email:'',password:'',password_confirmation:''},
             checked:'',
             api:''
         }
@@ -63,7 +63,7 @@ export default {
             axios.post(self.api + 'api/register', self.datos)
             .then(response => {
                 console.log('Usuario registrado');
-                Cookies.set("jwt", response.data.token);
+                Cookies.set("jwt", response.data.access_token);
                 navigateTo('/crud');
             })
             .catch(error => {

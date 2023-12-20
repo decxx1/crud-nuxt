@@ -97,6 +97,12 @@
     <Toast />
 </template>
 
+<script setup>
+    definePageMeta({
+        middleware: ['auth'],
+    });
+</script>
+
 <script >
 import axios from 'axios';
 import { FilterMatchMode } from 'primevue/api';
@@ -114,17 +120,27 @@ export default {
             users: [],
             roles:[],
             api: '',
+            jwt: '',
         }
     },
     created() {
         this.initFilters();
-        this.api = useRuntimeConfig().public.API_PATH;
+        this.api = useState('api').value;
+        this.jwt = useState('jwt').value;
         
     },
     async mounted() {
-        const response = await fetch(this.api + 'api/users');
+        const response = await fetch(this.api + 'api/users',{
+            headers: {
+                'Authorization': `Bearer ${this.jwt}`
+            }
+        });
         this.users = await response.json();
-        const response2 = await fetch(this.api + 'api/roles');
+        const response2 = await fetch(this.api + 'api/roles',{
+            headers: {
+                'Authorization': `Bearer ${this.jwt}`
+            }
+        });
         this.roles = await response2.json();
     },
     methods: {
@@ -147,7 +163,11 @@ export default {
         },
         reloadUsers(){
             var self = this;
-            axios.get(self.api + 'api/users')
+            axios.get(self.api + 'api/users',{
+                headers: {
+                    'Authorization': `Bearer ${self.jwt}`
+                }
+            })
             .then(response => {
                 self.users = response.data;
             })
@@ -158,7 +178,11 @@ export default {
         create(){
             this.submitted = true;
             var self = this;
-            axios.post(self.api + 'api/users', self.user)
+            axios.post(self.api + 'api/users', self.user, {
+                headers: {
+                    'Authorization': `Bearer ${self.jwt}`
+                }
+            })
             .then(response => {
                 console.log('usuario creado');
                 self.reloadUsers();
@@ -185,7 +209,11 @@ export default {
         edit() {
             this.submitted = true;
             var self = this;
-            axios.put(self.api + 'api/users/'+self.user.id, self.user)
+            axios.put(self.api + 'api/users/'+self.user.id, self.user, {
+                headers: {
+                    'Authorization': `Bearer ${self.jwt}`
+                }
+            })
             .then(response => {
                 console.log('Usuario editado');
                 self.reloadUsers()
@@ -211,7 +239,11 @@ export default {
         },
         deleteUser() {
             var self = this;
-            axios.delete(self.api + 'api/users/'+self.user.id)
+            axios.delete(self.api + 'api/users/'+self.user.id, {
+                headers: {
+                    'Authorization': `Bearer ${self.jwt}`
+                }
+            })
             .then(response => {
                 console.log('usuario borrado');
                 self.$toast.add({severity:'success', summary: 'Successful', detail: 'Usuario eliminado', life: 3000});

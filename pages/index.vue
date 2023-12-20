@@ -11,8 +11,8 @@
                     </div>
 
                     <div>
-                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                        <InputText id="email1" v-model="datos.email" type="email" placeholder="Email address" class="w-full md:w-30rem mb-5" style="padding: 1rem" />
+                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Usuario</label>
+                        <InputText id="email1" v-model="datos.name" type="text" placeholder="Usuario" class="w-full md:w-30rem mb-5" style="padding: 1rem" />
 
                         <label for="password1" class="block text-900 font-medium text-xl mb-2">Contraseña</label>
                         <Password id="password1" v-model="datos.password" placeholder="Contraseña" :toggleMask="true" class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
@@ -26,6 +26,7 @@
                         </div>
                         <Button label="Entrar" @click="login()" class="w-full p-3 text-xl"></Button>
                     </div>
+                    <NuxtLink to="/register" class="w-full p-3 text-xl">Ir a registrarse</NuxtLink>
                 </div>
             </div>
         </div>
@@ -45,12 +46,13 @@ definePageMeta({
 </script>
 <script>
 import axios from 'axios';
+import Cookies from "js-cookie";
 const { layoutConfig } = useLayout();
 
 export default {
     data() {
         return {
-            datos:{name:'usuario',role:8, email:'',password:'',password_confirmation:'123456'},
+            datos:{name:'',password:''},
             checked:'',
             api:''
         }
@@ -63,7 +65,7 @@ export default {
             var self = this;
             axios.post(self.api + 'api/login', self.datos)
             .then(response => {
-                console.log('Usuario registrado');
+                console.log('Usuario logeado');
                 Cookies.set("jwt", response.data.token);
                 navigateTo('/crud');
             })
