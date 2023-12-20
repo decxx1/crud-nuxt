@@ -15,6 +15,7 @@
     "@nuxt/devtools": "latest",
     "nuxt": "^3.8.2",
     "nuxt-primevue": "^0.2.2",
+    "sass": "^1.69.5",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5",
     "wrangler": "^3.20.0"
