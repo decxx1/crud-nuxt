@@ -5,7 +5,9 @@ export default defineNuxtConfig({
     preset: 'cloudflare-pages',
   },
   routeRules: {
-    "/": {ssr: false}
+    "/": {ssr: false},
+    "/crud": {ssr: false},
+    "/register": {ssr: false}
   },
   devtools: { 
     enabled: false,
