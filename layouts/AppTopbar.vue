@@ -25,6 +25,17 @@ const onSettingsClick = () => {
     topbarMenuActive.value = false;
     router.push('/utilities/documentation');
 };
+const jwt = useState('jwt').value;
+const api = useState('api').value;
+const logout = () => {
+    fetch(api + "api/logout", {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${jwt}`
+        }
+    });
+    navigateTo('/');
+};
 
 const topbarMenuClasses = computed(() => {
     return {
@@ -87,6 +98,10 @@ const isOutsideClicked = (event) => {
             <button @click="onSettingsClick()" class="p-link layout-topbar-button">
                 <i class="pi pi-cog"></i>
                 <span>Settings</span>
+            </button>
+            <button @click="logout()" class="p-link layout-topbar-button">
+                <i class="pi-sign-out"></i>
+                <span>Salir</span>
             </button>
         </div>
     </div>
