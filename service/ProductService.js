@@ -1,4 +1,4 @@
-export default {
+export const ProductService = {
     getProductsData() {
         return [
             {
