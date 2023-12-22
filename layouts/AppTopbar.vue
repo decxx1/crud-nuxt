@@ -6,6 +6,8 @@ const { layoutConfig, onMenuToggle } = useLayout();
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
 const router = useRouter();
+const jwt = useState('jwt').value;
+const api = useState('api').value;
 
 onMounted(() => {
     bindOutsideClickListener();
@@ -25,16 +27,18 @@ const onSettingsClick = () => {
     topbarMenuActive.value = false;
     router.push('/utilities/documentation');
 };
-const jwt = useState('jwt').value;
-const api = useState('api').value;
+
 const logout = () => {
     fetch(api + "api/logout", {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${jwt}`
         }
+    })
+    .finally(() => {
+        navigateTo('/');
     });
-    navigateTo('/');
+    
 };
 
 const topbarMenuClasses = computed(() => {

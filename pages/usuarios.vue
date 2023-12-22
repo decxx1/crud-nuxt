@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-        <h1 class="mt-5 mb-5">Usuarios</h1>
+    
         <div class="card">
             <Toolbar class="mb-4">
                 <template #start>
@@ -93,7 +92,7 @@
             </template>
         </Dialog>
         
-    </div>
+    
     <Toast />
 </template>
 

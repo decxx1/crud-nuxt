@@ -7,7 +7,8 @@ export default defineNuxtConfig({
   routeRules: {
     "/": {ssr: false},
     "/crud": {ssr: false},
-    "/register": {ssr: false}
+    "/register": {ssr: false},
+    "/dashboard": {ssr: false},
   },
   devtools: { 
     enabled: false,
